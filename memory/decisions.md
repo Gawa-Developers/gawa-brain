@@ -51,3 +51,13 @@ Durable org-wide engineering decisions. Include context and the tradeoff accepte
 **Why:** Microservices add operational complexity (service discovery, distributed tracing, inter-service auth, deployment orchestration) that is unjustified at early stage. Most startup-scale products never reach the point where this complexity is worth it. Monoliths are faster to develop, easier to debug, and simpler to deploy.
 
 **Tradeoff accepted:** Refactoring a monolith into services later is non-trivial. Mitigated by designing clear internal module boundaries from the start so extraction is feasible if needed.
+
+---
+
+## D6: Vercel Hosting Plan Follows Commercial Status, Not Repo Ownership
+
+**Decision:** For projects hosted on Vercel, stay on the Hobby (free) plan only while the deployment is genuinely non-commercial (no payments, ads, donation asks, or public marketing/sale of the product). Upgrade to Pro the moment any of those go live — do not try to stay on Hobby via workarounds once the product is commercial.
+
+**Why:** Vercel's fair use guidelines define commercial usage as any Deployment used for the financial gain of anyone involved in production of the project, including a paid employee or consultant. Enforcement in practice targets deployments that process payments, run ads, solicit donations, or are marketed for sale. Separately, Vercel's Hobby plan cannot connect to a GitHub Organization-owned repository at all — only personal-account-scoped repos — regardless of commercial status. A mirror-to-personal-account repo can work around the org-repo restriction pre-launch, but it does not work around the commercial-use restriction, and is unnecessary overhead once Pro is required anyway (Pro connects directly to org repos).
+
+**Tradeoff accepted:** Pre-launch MVP work on a Hobby-tier personal-account mirror adds a sync step (PR per release) if the canonical repo is org-owned. This is only worth doing pre-launch; switch to Pro connected directly to the org repo at the point of going live rather than continuing to maintain two repos.
