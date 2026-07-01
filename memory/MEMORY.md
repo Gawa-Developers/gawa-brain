@@ -14,3 +14,4 @@ General patterns, conventions, and decisions only. No project-specific content.
 
 - `sessions/2026/06/2026-06-26-brain-bootstrap.md` — Initial gawa-brain bootstrap: git flow, release flow, headless API design patterns, payment gateway abstraction, multi-tenancy best practices, webhook security.
 - `sessions/2026/06/2026-06-26-travel-it-all-phase1.md` — Phase 1 delivery: Prisma v7 adapter pattern, Next.js 16 proxy.ts, route group collision fix, z.coerce gotcha, node-vibrant v4 import, availability enforcement transaction pattern.
+- `sessions/2026/07/2026-07-01-vercel-hosting-decision.md` — Vercel hosting strategy for org-owned repos: Hobby vs Pro, commercial-use restriction, org-repo connection restriction. Promoted to decisions.md D6.
