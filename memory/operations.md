@@ -1,5 +1,23 @@
 # Operations — Gawa Developers
 
+## Project Setup
+
+**Every Gawa project — new or existing — gets Impeccable installed.** See [decisions.md — D8](decisions.md#d8-install-impeccable-as-standard-design-quality-tooling-on-every-project) for the why.
+
+```bash
+npx impeccable skills install -y --providers=claude --scope=project
+```
+
+Then **restart the Claude Code session** — skills installed mid-session aren't picked up by the running harness, so `/impeccable init` will fail with "Unknown command" if you try it before restarting. After restarting:
+
+```
+/impeccable init
+```
+
+This generates the project's PRODUCT.md (and DESIGN.md when relevant). Do this once per project, as early as possible — for an existing project, run it retroactively the next time you touch that repo.
+
+---
+
 ## Git Flow
 
 **All Gawa projects follow the same branch conventions.**

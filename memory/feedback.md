@@ -61,3 +61,13 @@ A memory that names a file path, function, or flag is a claim about what existed
 **Why:** Code changes. Memories don't update automatically. Acting on a stale memory (e.g. editing a file that was renamed) wastes time and may introduce errors.
 
 **How to apply:** For any memory-derived file path or symbol, do a quick `ls` or `grep` before using it as a basis for edits.
+
+---
+
+## F7: A Skill Installed Mid-Session Isn't Usable Until the Session Restarts
+
+Running `npx impeccable skills install` (or installing any other Claude Code skill) writes files to `.claude/skills/` immediately, but the running harness has already enumerated its available skills for this session and won't pick up the new one. Trying to invoke it — via the Skill tool or the user typing the slash command — fails ("Unknown skill" / "Unknown command") even though the files are correctly in place on disk.
+
+**Why:** Skill discovery happens once per session start, not on every message. This isn't a bug in the install — it's confirmed by checking the skill's own SKILL.md is well-formed and still failing to invoke it.
+
+**How to apply:** After installing a new skill mid-conversation, tell the user to restart the Claude Code session (new conversation / reopen the window) before trying to invoke it. Don't spend time debugging the skill's manifest first — verify it's a session-freshness issue by attempting the Skill tool call once; if it errors with "Unknown skill" despite a well-formed SKILL.md, that confirms it, not a real config problem.
