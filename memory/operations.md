@@ -1,5 +1,39 @@
 # Operations — Gawa Developers
 
+## Project Setup
+
+**Impeccable is installed once, globally, at `~/.claude/skills/impeccable/` — not per project.** See [decisions.md — D8](decisions.md#d8-install-impeccable-once-globally--not-per-project) for the why. Check `ls ~/.claude/skills/impeccable` before reinstalling — if it's already there, skip straight to `/impeccable init` below.
+
+If it's missing, the CLI's `--scope=global` flag has not reliably honored itself in practice:
+
+```bash
+npx impeccable skills install -y --providers=claude --scope=global
+# if it writes to ./.claude instead of ~/.claude, move it manually:
+mkdir -p ~/.claude/skills
+mv .claude/skills/impeccable ~/.claude/skills/impeccable
+rmdir .claude/skills 2>/dev/null
+```
+
+Then **restart the Claude Code session** — skills added to `~/.claude/skills/` aren't picked up by the running harness, so `/impeccable init` will fail with "Unknown command" if you try it before restarting. After restarting, per project:
+
+```
+/impeccable init
+```
+
+This generates that project's PRODUCT.md (and DESIGN.md when relevant). The skill install is one-time per machine; `/impeccable init` is still per-project — run it retroactively the next time you touch an existing repo that doesn't have a PRODUCT.md yet.
+
+### Custom skills (gawa-brain/skills/)
+
+Skills authored in-house (not third-party installs like Impeccable) live in `gawa-brain/skills/<name>/`, version-controlled like the rest of the brain, and are symlinked into `~/.claude/skills/<name>` so every project picks them up without duplicating files:
+
+```bash
+ln -s /path/to/gawa-brain/skills/<name> ~/.claude/skills/<name>
+```
+
+New machine setup: after cloning gawa-brain, symlink every folder under `gawa-brain/skills/` into `~/.claude/skills/` before starting work on any other Gawa project.
+
+---
+
 ## Git Flow
 
 **All Gawa projects follow the same branch conventions.**
